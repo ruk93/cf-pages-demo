@@ -31,5 +31,5 @@ export async function onRequest(context: EventContext<{},"",{}>) {
 
   const response = await next();
 
-  return editHtml(request,response);
+  return await editHtml(request,response);
 }

@@ -4,5 +4,5 @@ import "./style.css";
  * mount app after dom content loaded
  */
 window.addEventListener("DOMContentLoaded", () => {
-  document.getElementById("app").innerHTML = "App Loaded";
+  document.getElementById("app").innerHTML = "App Loaded in domain : "+window.env.domain;
 });

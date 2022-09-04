@@ -1,4 +1,23 @@
 
+class ElementHandler {
+    constructor(private request: Request){
+
+    }
+    element(e: HTMLDivElement) {
+       e.innerHTML = `
+       window.env = {
+        domain: "${this.request.url}"
+       }
+       `
+    }
+ }
+
+async function editHtml(request: Request, response: Response) {
+    return new HTMLRewriter()
+       .on("#env", new ElementHandler(request))
+       .transform(response)
+  }
+
 export async function onRequest(context: EventContext<{},"",{}>) {
   // Contents of context object
   const {
@@ -9,7 +28,8 @@ export async function onRequest(context: EventContext<{},"",{}>) {
     next, // used for middleware or to fetch assets
     data, // arbitrary space for passing data between middlewares
   } = context;
+
   const response = await next();
-  const responseText = await response.text();
-  return new Response(responseText + " from middleware");
+
+  return editHtml(request,response);
 }

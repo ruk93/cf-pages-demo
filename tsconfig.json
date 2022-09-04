@@ -10,7 +10,7 @@
     "downlevelIteration": true,
     "esModuleInterop": true,
     "types": ["@cloudflare/workers-types"],
-    "include": ["src/**/*"],
-    "exclude": ["functions/**/*"],
-  }
+  },
+  "include": ["src/**/*"],
+  "exclude": ["functions/**/*"]
 }

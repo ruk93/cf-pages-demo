@@ -14,7 +14,7 @@ class ElementHandler {
 
 async function editHtml(request: Request, response: Response) {
     return new HTMLRewriter()
-       .on("#env", new ElementHandler(request))
+       .on("body", new ElementHandler(request))
        .transform(response)
   }
 

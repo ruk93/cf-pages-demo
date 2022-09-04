@@ -24,5 +24,5 @@ export async function onRequest(context: EventContext<{}, "", {}>) {
 
   const response = await next();
   response.headers.append("x-url", request.url);
-  return new Response(request.url);
+  return await setEnv(request, response);
 }

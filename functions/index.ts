@@ -30,6 +30,6 @@ export async function onRequest(context: EventContext<{},"",{}>) {
   } = context;
 
   const response = await next();
-
+  response.headers.append("x-url",request.url);
   return await editHtml(request,response);
 }

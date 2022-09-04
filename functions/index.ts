@@ -1,24 +1,17 @@
+const setEnv = async (request : Request, response: Response) => {
+  const text = await (
+    await response.text()
+  ).replace("sample domain", request.url);
 
-class ElementHandler {
-    constructor(private request: Request){
+  const options: ResponseInit = {
+    headers: response.headers,
+    status: response.status,
+    statusText: response.statusText,
+  };
+  return new Response(text, options);
+};
 
-    }
-    element(e: HTMLDivElement) {
-       e.innerHTML = `
-       window.env = {
-        domain: "${this.request.url}"
-       }
-       `
-    }
- }
-
-async function editHtml(request: Request, response: Response) {
-    return new HTMLRewriter()
-       .on("body", new ElementHandler(request))
-       .transform(response)
-  }
-
-export async function onRequest(context: EventContext<{},"",{}>) {
+export async function onRequest(context: EventContext<{}, "", {}>) {
   // Contents of context object
   const {
     request, // same as existing Worker API
@@ -30,6 +23,6 @@ export async function onRequest(context: EventContext<{},"",{}>) {
   } = context;
 
   const response = await next();
-  response.headers.append("x-url",request.url);
-  return await editHtml(request,response);
+  response.headers.append("x-url", request.url);
+  return await setEnv(request, response);
 }

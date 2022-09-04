@@ -8,6 +8,9 @@
     "allowJs": true,
     "moduleResolution": "node",
     "downlevelIteration": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "types": ["@cloudflare/workers-types"],
+    "include": ["src/**/*"],
+    "exclude": ["functions/**/*"],
   }
 }

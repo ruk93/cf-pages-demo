@@ -11,6 +11,7 @@
   "author": "Rukshan Fernando",
   "license": "ISC",
   "devDependencies": {
+    "@cloudflare/workers-types": "^3.16.0",
     "@types/jest": "^26.0.23",
     "autoprefixer": "^10.2.5",
     "css-loader": "^5.2.4",

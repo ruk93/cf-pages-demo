@@ -2,7 +2,8 @@ import getConfig from "../config";
 
 const setEnv = async (request: Request, response: Response) => {
   let text = await response.text();
-  text = text.replace("//APPEND_JS_APP_ENV", getConfig(request));
+  const host = request.headers.get("host") ?? "";
+  text = text.replace("//APPEND_JS_APP_ENV", getConfig(host));
 
   const options: ResponseInit = {
     headers: response.headers,
@@ -24,6 +25,6 @@ export async function onRequest(context: EventContext<{}, "", {}>) {
   } = context;
 
   const response = await next();
-  response.headers.append("x-url", request.url);
+  response.headers.append("x-host", request.headers.get("host") ?? "unknown");
   return await setEnv(request, response);
 }

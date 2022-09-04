@@ -1,7 +1,7 @@
 const config = {
-    appName: "Foo App",
-    brand: "Lemon",
-    icon: "🍋",
+    appName: "Bar App",
+    brand: "Orange",
+    icon: "🍊",
 };
 
 export default config;

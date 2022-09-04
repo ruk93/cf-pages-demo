@@ -1,7 +1,14 @@
 const setEnv = async (request : Request, response: Response) => {
-  const text = await (
+  let text = await (
     await response.text()
   ).replace("sample domain", request.url);
+
+  //check coming headers
+  const headers = [];
+  request.headers.forEach((value,key) => {
+    headers[key] = value;
+  })
+  text = text.replace("</body>",`${JSON.stringify(headers, null, 2)}</body>`);
 
   const options: ResponseInit = {
     headers: response.headers,
